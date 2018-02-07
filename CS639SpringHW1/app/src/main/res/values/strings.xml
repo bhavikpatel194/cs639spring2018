@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CS639SpringHW1</string>
+    <string name="color">Color Changes</string>
+    <string name="animal">Animals</string>
+    <string name="bird">This is a Bird.</string>
+    <string name="cat">This is a Cat.</string>
+    <string name="dog">This is a Dog.</string>
 </resources>

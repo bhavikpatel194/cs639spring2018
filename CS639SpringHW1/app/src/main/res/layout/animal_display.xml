@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AnimalDisplayFragment">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="3">
+        <ImageView
+            android:id="@+id/bird"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:src="@drawable/bird"
+            android:padding="20dp"
+            android:clickable="true"
+            android:contentDescription="@string/animal" />
+        <TextView
+            android:id="@+id/birdText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="3">
+        <ImageView
+            android:id="@+id/cat"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:src="@drawable/cat"
+            android:padding="20dp"
+            android:clickable="true"
+            android:contentDescription="@string/animal" />
+        <TextView
+            android:id="@+id/catText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="3">
+        <ImageView
+            android:id="@+id/dog"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:src="@drawable/dog"
+            android:padding="20dp"
+            android:clickable="true"
+            android:contentDescription="@string/animal" />
+        <TextView
+            android:id="@+id/dogText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Start editing this file"/>
-</RelativeLayout>
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:gravity="center">
+        <ImageButton
+            android:id="@+id/greenButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorSecondary"
+            android:contentDescription="@string/color"/>
+        <ImageButton
+            android:id="@+id/lightBlueButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/color"/>
+        <ImageButton
+            android:id="@+id/darkBlueButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:contentDescription="@string/color"/>
+        <ImageButton
+            android:id="@+id/pinkButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/color"/>
+        <ImageButton
+            android:id="@+id/blackButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorSecondaryDark"
+            android:contentDescription="@string/color"/>
+    </LinearLayout>
+
+</LinearLayout>
