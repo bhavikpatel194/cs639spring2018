@@ -18,141 +18,75 @@ import android.widget.Toast;
  */
 
 public class AnimalDisplayFragment extends Fragment{
-    TextView dogText, birdText, catText;
-    ImageView bird, cat, dog;
-    ImageButton greenButton, lightBlueButton, darkBlueButton, blackButton, pinkButton;
-
+    ImageView mImageView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.animal_display, container, false);
 
-        bird = view.findViewById(R.id.bird);                //getting the views by id's
-        cat = view.findViewById(R.id.cat);
-        dog = view.findViewById(R.id.dog);
-
-
-        greenButton = view.findViewById(R.id.greenButton);
-        lightBlueButton = view.findViewById(R.id.lightBlueButton);
-        darkBlueButton = view.findViewById(R.id.darkBlueButton);
-        pinkButton = view.findViewById(R.id.pinkButton);
-        blackButton = view.findViewById(R.id.blackButton);
-
-        birdText = view.findViewById(R.id.birdText);
-        catText = view.findViewById(R.id.catText);
-        dogText = view.findViewById(R.id.dogText);
-
-        bird.setOnClickListener(new View.OnClickListener() {            //calling onClickListener on bird
-            private boolean stateChanged1 = true;
-            @Override
-            public void onClick(View v) {
-                if (stateChanged1) {                                    //on click make text visible and allow colour change
-                    String birdDesc = "This is a Bird";
-                    birdText.setText(birdDesc);
-                    birdText.setVisibility(view.VISIBLE);
-                    stateChanged1 = false;
-                    changeColor();
-                }
-                else {
-                    birdText.setVisibility(view.INVISIBLE);             //on again click make text invisible and freeze the color picker to not allow the change
-                    stateChanged1 = true;
-                    noChange();
-                }
-            }
-        });
-        cat.setOnClickListener(new View.OnClickListener() {             //calling onClickListener on cat
-            private boolean stateChanged2 = true;
-            @Override
-            public void onClick(View v) {
-                if (stateChanged2) {
-                    String catDesc = "This is a Cat";
-                    catText.setText(catDesc);
-                    catText.setVisibility(view.VISIBLE);
-                    stateChanged2 = false;
-                    changeColor();
-                }
-                else {
-                    catText.setVisibility(view.INVISIBLE);
-                    stateChanged2 = true;
-                    noChange();
-                }
-            }
-        });
-        dog.setOnClickListener(new View.OnClickListener() {             //calling onClickListener on dog
-            private boolean stateChanged3 = true;
-            @Override
-            public void onClick(View v) {
-                if (stateChanged3) {
-                    String dogDesc = "This is a Dog";
-                    dogText.setText(dogDesc);
-                    dogText.setVisibility(view.VISIBLE);
-                    stateChanged3 = false;
-                    changeColor();
-                } else {
-                    dogText.setVisibility(view.INVISIBLE);
-                    stateChanged3 = true;
-                    noChange();
-                }
-            }
-        });
         return view;
     }
-    public void changeColor(){              //function for color change when the ImageView is clicked
 
-        greenButton.setEnabled(true);
-        lightBlueButton.setEnabled(true);
-        darkBlueButton.setEnabled(true);
-        pinkButton.setEnabled(true);
-        blackButton.setEnabled(true);
-
-            greenButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bird.setColorFilter(getActivity().getResources().getColor(R.color.colorSecondary));
-                    cat.setColorFilter(getActivity().getResources().getColor(R.color.colorSecondary));
-                    dog.setColorFilter(getActivity().getResources().getColor(R.color.colorSecondary));
-                }
-            });
-            lightBlueButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bird.setColorFilter(getActivity().getResources().getColor(R.color.colorPrimary));
-                    cat.setColorFilter(getActivity().getResources().getColor(R.color.colorPrimary));
-                    dog.setColorFilter(getActivity().getResources().getColor(R.color.colorPrimary));
-                }
-            });
-            pinkButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bird.setColorFilter(getActivity().getResources().getColor(R.color.colorAccent));
-                    cat.setColorFilter(getActivity().getResources().getColor(R.color.colorAccent));
-                    dog.setColorFilter(getActivity().getResources().getColor(R.color.colorAccent));
-                }
-            });
-            blackButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bird.setColorFilter(getActivity().getResources().getColor(R.color.colorSecondaryDark));
-                    cat.setColorFilter(getActivity().getResources().getColor(R.color.colorSecondaryDark));
-                    dog.setColorFilter(getActivity().getResources().getColor(R.color.colorSecondaryDark));
-                }
-            });
-            darkBlueButton.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    bird.setColorFilter(getActivity().getResources().getColor(R.color.colorPrimaryDark));
-                    cat.setColorFilter(getActivity().getResources().getColor(R.color.colorPrimaryDark));
-                    dog.setColorFilter(getActivity().getResources().getColor(R.color.colorPrimaryDark));
-                }
-            });
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
-    public void noChange(){                                 //when image is not selected, no color change to be made
-        greenButton.setEnabled(false);
-        lightBlueButton.setEnabled(false);
-        darkBlueButton.setEnabled(false);
-        blackButton.setEnabled(false);
-        pinkButton.setEnabled(false);
+
+    private void addImageClickListeners() {
+        /**
+         * Create an anonymous inner class that'll be used for our onClickListener.
+         * See: https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html
+         * Also: https://stackoverflow.com/questions/355167/how-are-anonymous-inner-classes-used-in-java
+         */
+        View.OnClickListener imageListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //more information on ternary operator: https://www.sitepoint.com/java-ternary-operator/
+                mSelectedImage = mSelectedImage == view ? null : (ImageView) view;
+                int selectedImageId = mSelectedImage == null ? 0 : mSelectedImage.getId();
+                //show the animal description if the animal's image id = selectedImageId. If not, hide it.
+                mBirdDescription.setVisibility(selectedImageId == R.id.bird ? View.VISIBLE : View.INVISIBLE);
+                mCatDescription.setVisibility(selectedImageId == R.id.cat ? View.VISIBLE : View.INVISIBLE);
+                mDogDescription.setVisibility(selectedImageId == R.id.dog ? View.VISIBLE : View.INVISIBLE);
+            }
+        };
+
+        //add above listener to animal images
+        getView().findViewById(R.id.bird).setOnClickListener(imageListener);
+        getView().findViewById(R.id.cat).setOnClickListener(imageListener);
+        getView().findViewById(R.id.dog).setOnClickListener(imageListener);
     }
+
+    private void addColorClickListeners() {
+        /**
+         * Create an anonymous inner class that'll be used for our onClickListener.
+         * See: https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html
+         * Also: https://stackoverflow.com/questions/355167/how-are-anonymous-inner-classes-used-in-java
+         */
+        View.OnClickListener colorListener = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                //if mSelectedImage == null, it means that no image is selected. Tell user to select an image
+                if (mSelectedImage == null) {
+                    Toast.makeText(getActivity(), R.string.please_select_an_animal_image_before_choosing_a_color,
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                //extract color from the view that we clicked on. Since the background of the view
+                //was just a color value in XML, Android converts it to a ColorDrawable
+                //cast the background to a ColorDrawable, extract the color from the Drawable, and
+                //then assign that color to the animal
+                int viewBackgroundColor = ((ColorDrawable)view.getBackground()).getColor();
+                mSelectedImage.setColorFilter(viewBackgroundColor, PorterDuff.Mode.SRC_IN);
+            }
+        };
+
+        //add above listener to views that'll be used for color picker
+        getView().findViewById(R.id.red).setOnClickListener(colorListener);
+        getView().findViewById(R.id.orange).setOnClickListener(colorListener);
+        getView().findViewById(R.id.green).setOnClickListener(colorListener);
+        getView().findViewById(R.id.blue).setOnClickListener(colorListener);
+        getView().findViewById(R.id.yellow).setOnClickListener(colorListener);
 }

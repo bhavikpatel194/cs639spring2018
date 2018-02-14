@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CS639SpringHW2</string>
+    <string-array name="bird">
+        <item>This is a bird.</item>
+        <item>It is an Eagle.</item>
+    </string-array>
+    <string name="cat">It drinks milk</string>
+</resources>
+
